@@ -13,9 +13,12 @@
         "fruitcake/laravel-cors": "^2.0.5",
         "guzzlehttp/guzzle": "^7.2",
         "laravel/framework": "^9.0",
+        "laravel/sanctum": "^2.14",
         "laravel/tinker": "^2.7",
-        "statamic/cms": "3.3.*",
-        "laravel/sanctum": "^2.14"
+        "spatie/cpu-load-health-check": "^1.0",
+        "spatie/security-advisories-health-check": "^1.0",
+        "spatie/statamic-health": "^1.0",
+        "statamic/cms": "3.3.*"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.6",
