@@ -16,6 +16,7 @@
         "laravel/framework": "^9.0",
         "laravel/sanctum": "^2.14",
         "laravel/tinker": "^2.7",
+        "mitydigital/sitemapamic": "^2.3",
         "spatie/cpu-load-health-check": "^1.0",
         "spatie/security-advisories-health-check": "^1.0",
         "spatie/statamic-health": "^1.0",
