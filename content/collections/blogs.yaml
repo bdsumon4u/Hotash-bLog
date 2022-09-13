@@ -2,8 +2,10 @@ title: Blogs
 template: blogs/show
 layout: layout
 mount: home
+taxonomies:
+  - categories
 revisions: false
-route: "/{slug}"
+route: '/{slug}'
 date: true
 sort_dir: asc
 date_behavior:
