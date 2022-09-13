@@ -1307,8 +1307,8 @@ pre > code .token.content > blockquote {
   border-radius: 0.75rem !important;
 }
 
-.rounded-full {
-  border-radius: 9999px !important;
+.rounded-md {
+  border-radius: 0.375rem !important;
 }
 
 .border-b-2 {

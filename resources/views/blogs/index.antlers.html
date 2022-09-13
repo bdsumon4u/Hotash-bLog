@@ -1,0 +1,26 @@
+<article class="max-w-6xl px-3 mx-auto">
+    <header class="max-w-xl mx-auto text-center content">
+        <h1 class="mb-4">Blogs</h1>
+        <p>
+            This is description of the type of content you would expect to read
+            here on this blog.
+        </p>
+    </header>
+    {{ collection:blogs as="posts" paginate="5" sort="date:desc" }}
+    <section class="grid grid-cols-1 gap-6 py-8 md:grid-cols-2 lg:grid-cols-3">
+        {{ posts }}
+        <div class="{{ $first ? 'md:col-span-2' : 'col-span-1' }}">
+            {{ partial:blogs/card :oversized="first" }}
+        </div>
+        {{ /posts }}
+    </section>
+    {{ paginate }} {{ if $prev_page || $next_page }}
+    <section class="flex justify-center pt-16 space-x-8 text-xl font-bold">
+        {{ if $prev_page }}
+        <a href="{{ $prev_page }}"><span class="squiggle">‹</span> Prev</a>
+        {{ /if }} {{ if $next_page }}
+        <a href="{{ $next_page }}">Next <span class="squiggle">›</span></a>
+        {{ /if }}
+    </section>
+    {{ /if }} {{ /paginate }} {{ /collection:blogs }}
+</article>
