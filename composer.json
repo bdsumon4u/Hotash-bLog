@@ -20,7 +20,8 @@
         "spatie/cpu-load-health-check": "^1.0",
         "spatie/security-advisories-health-check": "^1.0",
         "spatie/statamic-health": "^1.0",
-        "statamic/cms": "3.3.*"
+        "statamic/cms": "3.3.*",
+        "statamic/ssg": "^1.2"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.6",
@@ -60,6 +61,12 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "scripts": {
+        "build": [
+            "npm run production",
+            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\"",
+            "@php artisan key:generate",
+            "@php please ssg:generate"
+        ],
         "pre-update-cmd": [
             "Statamic\\Console\\Composer\\Scripts::preUpdateCmd"
         ],
