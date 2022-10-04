@@ -1,49 +1,152 @@
-<article class="max-w-5xl mx-auto px-3">
-    <header class="mx-auto max-w-3xl text-center content">
-        <h1>{{ $title }}</h1>
-        {{ $excerpt }}
-        <div class="my-12 flex items-center justify-center">
-            {{ if $author }}
-            <img
-                src="{{ $author:avatar ?? $author:email | gravatar(160) }}"
-                class="h-20 w-20 my-0 rounded-md mr-4"
-            />
-            {{ /if }}
-            <div class="text-left">
-                {{ if author }}
-                <div>
-                    <a
-                        class="font-bold no-underline"
-                        href="/authors/{{ $author:handle }}"
-                    >
-                        <span
-                            class="bg-clip-text text-transparent bg-gradient-to-r from-hot-pink to-purple-500"
-                        >
-                            {{ $author:name }}
-                        </span>
-                    </a>
-                </div>
-                {{ /if }}
-                <time datetime="{{ $date | format('Y-m-d') }}"
-                    >{{ $date }}</time
-                >
-            </div>
-        </div>
-    </header>
-    <img class="rounded-xl" src="{{ $thumbnail }}" alt="{{ $thumbnail:alt }}" />
-    <section class="max-w-3xl mx-auto py-6 lg:py-12 content">
-        {{ content }} {{ if $type == "text" }} {{ $text }} {{ elseif $type ==
-        "code_block" }}
-        <pre
-            class="language-{{ $mode ?? 'php' }} rounded"
-        ><code>{{ $code }}</code></pre>
-        {{ elseif $type == "image" }}
-        <figure>
-            <img src="{{ $image }}" alt="{{ $caption }}" />
-            <figcaption>{{ $caption }}</figcaption>
-        </figure>
-        {{ /if }} {{ /content }}
-    </section>
+<section class="px-2 py-8 md:px-6">
+    <div class="flex flex-wrap justify-between mx-auto max-w-7xl">
+        <div class="w-full lg:w-8/12">
+            <article class="p-2 mx-auto bg-white rounded-lg shadow-md md:p-4">
+                <div class="content">
+                    <div class="w-full mx-auto mb-12 text-left md:w-4/5">
+                        <img
+                            src="{{ $thumbnail }}"
+                            alt="{{ $thumbnail:alt }}"
+                            class="object-cover w-full h-64 bg-center rounded-lg"
+                        />
 
-    {{ if $settings:show_signup }} {{ partial:sign-up}} {{ /if }}
-</article>
+                        <section
+                            class="flex flex-col gap-2 mt-2 mb-4 text-xs uppercase"
+                        >
+                            <!-- <p
+                                class="p-1 text-xs font-semibold tracking-wider text-primary"
+                            >
+                                Development
+                            </p> -->
+                            {{ if categories }}
+                            <div class="flex flex-wrap gap-2">
+                                {{ categories }}
+                                <a
+                                    class="px-2 py-1 text-gray-900 no-underline bg-gray-200 rounded-sm badge hover:bg-gray-300"
+                                    href="{{ url }}"
+                                    >{{ title }}</a
+                                >
+                                {{ /categories }}
+                            </div>
+                            {{ /if }}
+                        </section>
+                        <h1
+                            class="mb-3 text-3xl font-bold leading-tight text-gray-900 md:text-4xl"
+                            itemprop="headline"
+                            title="Rise of Tailwind - A Utility First CSS Framework"
+                        >
+                            {{ $title }}
+                        </h1>
+                        {{ if $author }}
+                        <a
+                            class="flex items-center text-gray-700 no-underline"
+                            href="/authors/{{ $author:handle }}"
+                        >
+                            <div class="w-10 avatar">
+                                <img
+                                    class="rounded-md"
+                                    src="{{ $author:avatar ?? $author:email | gravatar(160) }}"
+                                    alt="Photo"
+                                />
+                            </div>
+                            <div class="ml-2">
+                                <p class="text-sm font-semibold text-gray-800">
+                                    {{ $author:name }}
+                                </p>
+                                <p class="text-sm text-gray-500 uppercase">
+                                    <time
+                                        datetime="{{ $date | format('d-M-Y') }}"
+                                        >{{ $date | format('d-M-Y') }}</time
+                                    >
+                                </p>
+                            </div>
+                        </a>
+                        {{ /if }}
+                    </div>
+
+                    <div
+                        class="w-full px-4 py-2 mx-auto mb-12 text-lg border-2 border-dashed md:w-4/5"
+                    >
+                        {{ $excerpt }}
+                    </div>
+
+                    <div class="w-full mx-auto prose md:w-4/5">
+                        {{ content }} {{ if $type == "text" }} {{ $text }} {{
+                        elseif $type == "code_block" }}
+                        <pre
+                            class="language-{{ $mode ?? 'php' }} rounded"
+                        ><code>{{ $code }}</code></pre>
+                        {{ elseif $type == "image" }}
+                        <figure>
+                            <img src="{{ $image }}" alt="{{ $caption }}" />
+                            <figcaption>{{ $caption }}</figcaption>
+                        </figure>
+                        {{ /if }} {{ /content }}
+                    </div>
+                </div>
+                {{ if $settings:show_signup }} {{ partial:sign-up}} {{ /if }}
+            </article>
+        </div>
+
+        <div class="flex-1 lg:flex-none lg:w-4/12">
+            <div class="px-2 mt-10 md:px-8 lg:mt-0">
+                <h1 class="mb-4 text-xl font-bold text-gray-700">Categories</h1>
+                <div
+                    class="flex flex-col px-4 py-6 mx-auto bg-white rounded-lg shadow-md"
+                >
+                    <ul>
+                        {{ taxonomy:categories }}
+                        <li class="my-2">
+                            <a
+                                href="{{ url }}"
+                                class="flex justify-between mx-1 font-bold text-gray-700 hover:text-gray-600 hover:underline"
+                                >
+                                <div>- {{ title }}</div>
+                                <div>{{ collection:count in="blogs" :taxonomy:categories="slug" }}</div>
+                            </a>
+                        </li>
+                        {{ /taxonomy:categories }}
+                    </ul>
+                </div>
+            </div>
+            {{ if related_posts }}
+            <div class="px-2 mt-10 md:px-8">
+                <h1 class="mb-4 text-xl font-bold text-gray-700">
+                    Related Posts
+                </h1>
+                {{ related_posts }}
+                <div
+                    class="flex flex-col px-8 py-4 mx-auto my-2 bg-white rounded-lg shadow-md"
+                >
+                    <a
+                        href="{{ url }}"
+                        class="text-lg font-semibold text-gray-700 hover:underline"
+                        >{{ title }}</a
+                    >
+                    <div class="flex items-center justify-between mt-4">
+                        {{ if $author }}
+                        <div class="flex items-center">
+                            <img
+                                src="{{ $author:avatar ?? $author:email | gravatar(160) }}"
+                                alt="Photo"
+                                class="object-cover w-8 h-8 rounded-md"
+                            /><a
+                                href="/authors/{{ $author:handle }}"
+                                class="mx-3 text-sm text-gray-700 hover:underline"
+                                >{{ $author:name }}</a
+                            >
+                        </div>
+                        {{ /if }}
+                        <span class="text-sm font-light text-gray-600">
+                            <time datetime="{{ $date | format('d-M-Y') }}">
+                                {{ $date | format('d-M-Y') }}
+                            </time>
+                        </span>
+                    </div>
+                </div>
+                {{ /related_posts }}
+            </div>
+            {{ /if }}
+        </div>
+    </div>
+</section>

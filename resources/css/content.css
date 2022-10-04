@@ -1,6 +1,6 @@
 .content {
     h1 {
-        @apply font-display uppercase font-bold leading-none;
+        @apply font-bold leading-none uppercase font-display;
         margin-bottom: 1em;
 
         font-size: min(max(3rem, 6.25vw), 7rem);
@@ -10,20 +10,20 @@
     }
 
     h2 {
-        @apply text-4xl font-bold leading-none mt-12 py-6 tracking-tight;
+        @apply py-6 mt-6 text-4xl font-bold leading-none tracking-tight;
     }
 
     h3 {
-        @apply text-xl font-bold leading-none py-6;
+        @apply py-6 text-xl font-bold leading-none;
     }
 
     h4 {
-        @apply font-bold uppercase tracking-widest leading-none py-6;
+        @apply py-6 font-bold leading-none tracking-widest uppercase;
     }
 
     > p {
         @apply text-lg leading-relaxed;
-        margin-bottom: 2em;
+        margin-bottom: 1em;
     }
 
     > p:first-of-type {
@@ -31,7 +31,7 @@
     }
 
     > blockquote {
-        @apply text-center font-bold italic px-4 mb-12 pt-6 text-3xl leading-tight;
+        @apply px-4 pt-6 mb-12 text-3xl italic font-bold leading-tight text-center;
     }
 
     > blockquote > p {
@@ -50,14 +50,14 @@
     }
 
     ul:not(.list-none) {
-        @apply pl-0 list-disc ml-10 mb-8 text-lg;
+        @apply pl-0 mb-8 ml-10 text-lg list-disc;
         li {
             @apply mb-1;
         }
     }
 
     ol {
-        @apply pl-0 list-decimal ml-10 mb-8 text-lg;
+        @apply pl-0 mb-8 ml-10 text-lg list-decimal;
         li {
             @apply mb-1;
         }
@@ -68,21 +68,27 @@
     ul li > code,
     ol li *:not(pre) code,
     ol li > code {
-        @apply inline-block text-white text-sm p-1 leading-none whitespace-nowrap font-mono align-baseline;
+        @apply inline-block p-1 font-mono text-sm leading-none text-white align-baseline whitespace-nowrap;
     }
 
-    pre, pre&, > ul li pre, > ol li pre {
-        @apply flex p-0 text-sm leading-loose mb-8;
+    pre,
+    pre&,
+    > ul li pre,
+    > ol li pre {
+        @apply flex p-0 mb-8 text-sm leading-loose;
     }
 
-    pre code, pre code&, > ul li pre code, > ol li pre code {
+    pre code,
+    pre code&,
+    > ul li pre code,
+    > ol li pre code {
         @apply p-4;
     }
 
     table {
-        @apply w-full text-left border-2 border-collapse mb-8 text-sm;
+        @apply w-full mb-8 text-sm text-left border-2 border-collapse;
         th {
-            @apply font-bold p-4 text-xl border-t-4 border-b;
+            @apply p-4 text-xl font-bold border-t-4 border-b;
         }
 
         td {
@@ -96,9 +102,8 @@
 }
 
 .content section > *:first-child {
-    @apply mt-0 pt-0;
+    @apply pt-0 mt-0;
 }
-
 
 .personality-formal .content {
     h1 {
